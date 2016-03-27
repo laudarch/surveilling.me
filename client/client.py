@@ -18,6 +18,7 @@ def traceroute(target):
     return ipaddrs
 
 def main():
+    pwnd = False
     print "{?} Checking $PATH for traceroute..."
     if find_executable("traceroute"):
         print "{+} Traceroute found in $PATH"
@@ -49,11 +50,14 @@ def main():
         prodname = row[0]
         shitweasels[ipaddress] = prodname
     # now this is REALLY INEFFICIENT BUT I DONT FUCKING CARE
+    global pwned
     for hop in hops:
         for ipaddress, prodname in shitweasels.iteritems():
             if hop == ipaddress:
                 print "{+} SURVEILLANCE DETECTED! Product Name: %s  IP Address: %s" %(prodname, ipaddress)
-    print "{+} Done! If surveillance shitweaselry was detected, take some precautions!!!"
+                pwnd = True
+    if pwnd:
+        print "{+} Done! If surveillance shitweaselry was detected, take some precautions!!!"
 
 
 if __name__ == "__main__":
